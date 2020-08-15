@@ -5,12 +5,18 @@
  * CLEAZY_THREAD initializes thread local storage for profiling objects.
  * This macro must be called on a thread being profiled before any block
  * or function.
+ *
+ * NAME must be a null terminated character array with lifetime
+ * exceeding that of any cleazy objects. E.g. a string literal.
  */
 #define CLEAZY_THREAD(NAME) cleazy_thread(NAME);
 
 /*
  * CLEAZY_BK and CLEAZY_FN create a new block that is profiled and
  * terminated by CLEAZY_END.
+ *
+ * NAME must be a null terminated character array with lifetime
+ * exceeding that of any cleazy objects. E.g. a string literal.
  *
  * CLEAZY_FN is a helper macro that passes the current function name to
  * CLEAZY_BK.
@@ -72,6 +78,9 @@ extern const struct cleazy_dsc cleazy_dsc_push;
 /*
  * CLEAZY_FLUSH creates a new easy_profiler v2.1.0 file of all the
  * blocks created since the start of the application or the last flush.
+ *
+ * FILENAME must be a null terminated character array with lifetime
+ * exceeding that of any cleazy objects. E.g. a string literal.
  *
  * Onus is on the user of the library to ensure no threads are creating
  * new events while data is being written to disk. CLEAZY_PAUSE and

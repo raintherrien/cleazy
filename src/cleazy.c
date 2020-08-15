@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 /* Try to fit block buffers on a single 4KiB page */
 #define CLEAZY_TLDBLKBUFSZ  (4096 - sizeof(struct cleazy_blklst *)) / sizeof(struct cleazy_blk)
@@ -73,6 +74,21 @@ const struct cleazy_dsc cleazy_dsc_push = {
     .argb = 0xffff0000
 };
 #endif
+
+/*
+ * Simple means of reading current nanosecond since epoch.
+ * TODO: Because of this little function we require POSIX.1b
+ */
+uint64_t
+cleazy_nowns(void)
+{
+    struct timespec ts;
+    if (clock_gettime(CLOCK_REALTIME, &ts) != 0) {
+        perror("Error clock_gettime");
+        return 0;
+    }
+    return ts.tv_sec * 1000000000L + ts.tv_nsec;
+}
 
 void
 cleazy_cleanup(void)
