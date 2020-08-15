@@ -67,7 +67,10 @@ static void cleazy_grow_tld_blks(void);
  */
 #ifdef CLEAZY_PROFILE_SELF
 const struct cleazy_dsc cleazy_dsc_push = {
-    .name = "cleazy_push", .file = "self profiling", .line = 0
+    .name = "cleazy_push",
+    .file = "self profiling",
+    .line = 0,
+    .argb = 0xffff0000
 };
 #endif
 

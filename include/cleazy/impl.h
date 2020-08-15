@@ -19,7 +19,7 @@
  * except that they also accept a uint32_t ARGB color value for the
  * easy_profiler GUI.
  */
-#define CLEAZY_BKC(NAME,ARGB) do {                           \
+#define CLEAZY_BKC(NAME,ARGB) do {                            \
         static const struct cleazy_dsc cleazy_dsc_local = {   \
             .name = NAME,                                     \
             .file = __FILE__,                                 \
